@@ -1,0 +1,10 @@
+{
+  "mumbai": {
+    "AminoChainMarketplace": {
+      "address": "0x350D2e60AEAbCc3a6515Dc4CAd92b8427c4C0232"
+    },
+    "AminoChainDonation": {
+      "address": "0xe492E25BebC33e1E594c225784d8D856BAE53412"
+    }
+  }
+}

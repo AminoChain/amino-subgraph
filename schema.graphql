@@ -1,0 +1,74 @@
+type ExistingTokenId @entity {
+  id: ID!
+  tokenId: BigInt!
+  buyer: Bytes
+  sizeInCC: BigInt!
+  price: BigInt
+  donor: Bytes!
+  bioBank: Bytes
+  hlaHashes: HlaHaplotypesHashed
+}
+
+type PendingSale @entity {
+  id: ID!
+  tokenId: BigInt!
+  escrowedPayment: BigInt!
+  completed: Boolean!
+}
+
+type NewListing @entity {
+  id: ID!
+  tokenId: BigInt!
+  sizeInCC: BigInt!
+  price: BigInt!
+  donor: Bytes!
+  bioBank: Bytes!
+}
+
+type SaleInitiated @entity {
+  id: ID!
+  buyer: Bytes!
+  tokenId: BigInt!
+  sizeInCC: BigInt!
+  donor: Bytes!
+  escrowedPayment: BigInt!
+}
+
+type ListingCanceled @entity {
+  id: ID!
+  tokenId: BigInt!
+}
+
+type SaleCompleted @entity {
+  id: ID!
+  transactionHash: Bytes!
+  buyer: Bytes!
+  tokenId: BigInt!
+  donor: Bytes!
+  salePrice: BigInt!
+  donorIncentive: BigInt!
+  protocolFee: BigInt!
+}
+
+type SaleRefunded @entity {
+  id: ID!
+  tokenId: BigInt!
+  refundTotal: BigInt!
+}
+
+type HlaHaplotypesHashed @entity(immutable: true) {
+  id: ID!
+  hlaHashed_A: Bytes! # bytes32
+  hlaHashed_B: Bytes! # bytes32
+  hlaHashed_C: Bytes! # bytes32
+  hlaHashed_DPB: Bytes! # bytes32
+  hlaHashed_DRB: Bytes! # bytes32
+}
+
+type StemCellDonationTokenized @entity {
+  id: ID!
+  donor: Bytes!
+  hlaHashes: HlaHaplotypesHashed!
+  tokenIds: [BigInt!]!
+  amounts: [BigInt!]!
+}

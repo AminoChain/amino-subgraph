@@ -1,0 +1,56 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: AminoChainMarketplace
+    network: mumbai
+    source:
+      address: "0x350D2e60AEAbCc3a6515Dc4CAd92b8427c4C0232"
+      abi: AminoChainMarketplace
+      startBlock: 29015835
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - listingCanceled
+        - newListing
+        - saleCompleted
+        - saleInitiated
+        - saleRefunded
+      abis:
+        - name: AminoChainMarketplace
+          file: ./abis/AminoChainMarketplace.json
+      eventHandlers:
+        - event: listingCanceled(uint256)
+          handler: handlelistingCanceled
+        - event: newListing(address,uint256,uint256,uint256,address,address)
+          handler: handlenewListing
+        - event: saleCompleted(address,address,uint256,address,uint256,uint256,uint256)
+          handler: handlesaleCompleted
+        - event: saleInitiated(address,address,uint256,uint256,address,uint256)
+          handler: handlesaleInitiated
+        - event: saleRefunded(uint256,address,address,uint256)
+          handler: handlesaleRefunded
+      file: ./src/amino-chain-marketplace.ts
+  - kind: ethereum
+    name: AminoChainDonation
+    network: mumbai
+    source:
+      address: "0xb7De77FEb9D7BBC536EC15900E59Ce1978C56503"
+      abi: AminoChainDonation
+      startBlock: 29015835
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - NFTMinted
+      abis:
+        - name: AminoChainDonation
+          file: ./abis/AminoChainDonation.json
+      eventHandlers:
+        - event: NFTMinted(address,(bytes32,bytes32,bytes32,bytes32,bytes32),uint256[],uint256[])
+          handler: handleNFTMinted
+      file: ./src/amino-chain-donation.ts
