@@ -6,7 +6,7 @@ dataSources:
     name: AminoChainMarketplace
     network: mumbai
     source:
-      address: "0x350D2e60AEAbCc3a6515Dc4CAd92b8427c4C0232"
+      address: "0xaD4ef14479a1EA2F18449ff46D19707f6ab18642"
       abi: AminoChainMarketplace
       startBlock: 29015835
     mapping:
@@ -38,7 +38,7 @@ dataSources:
     name: AminoChainDonation
     network: mumbai
     source:
-      address: "0xb7De77FEb9D7BBC536EC15900E59Ce1978C56503"
+      address: "0xdF20EDD683d4a5e14a7B37eC9fDc6884d07Ba92E"
       abi: AminoChainDonation
       startBlock: 29015835
     mapping:

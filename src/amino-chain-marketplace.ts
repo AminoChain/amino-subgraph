@@ -14,6 +14,7 @@ import {
   ListingCanceled,
   SaleCompleted,
   SaleRefunded,
+  HlaHaplotypesHashed,
 } from "../generated/schema";
 
 export function handlenewListing(event: newListing): void {
@@ -25,6 +26,7 @@ export function handlenewListing(event: newListing): void {
   let existingTokenId = ExistingTokenId.load(
     event.params.tokenId.toHexString()
   );
+  let hlaData = HlaHaplotypesHashed.load(event.params.donor.toString());
 
   if (!newListing) {
     newListing = new NewListing(
@@ -51,6 +53,7 @@ export function handlenewListing(event: newListing): void {
   existingTokenId.price = event.params.price;
   existingTokenId.donor = event.params.donor;
   existingTokenId.bioBank = event.params.bioBank;
+  existingTokenId.hlaHashes = hlaData!.id;
 
   newListing.save();
   existingTokenId.save();
