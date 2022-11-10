@@ -86,6 +86,25 @@
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum AminoChainMarketplace.physicalStatus",
+        "name": "status",
+        "type": "uint8"
+      }
+    ],
+    "name": "deliveryStatusChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       }
     ],
     "name": "listingCanceled",
@@ -169,6 +188,12 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      },
       {
         "indexed": false,
         "internalType": "address",
@@ -377,9 +402,50 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "getPendingSaleData",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "date", "type": "uint256" },
+          {
+            "internalType": "enum AminoChainMarketplace.physicalStatus",
+            "name": "saleStatus",
+            "type": "uint8"
+          },
+          { "internalType": "address", "name": "seller", "type": "address" },
+          { "internalType": "address", "name": "buyer", "type": "address" },
+          { "internalType": "address", "name": "bioBank", "type": "address" },
+          { "internalType": "address", "name": "donor", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "escrowedPayment",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AminoChainMarketplace.PendingSale",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "i_usdc",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "buyer", "type": "address" }
+    ],
+    "name": "isApprovedToBuy",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },

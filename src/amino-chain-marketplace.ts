@@ -5,6 +5,7 @@ import {
   saleCompleted,
   saleInitiated,
   saleRefunded,
+  deliveryStatusChanged,
 } from "../generated/AminoChainMarketplace/AminoChainMarketplace";
 import {
   ExistingTokenId,
@@ -15,6 +16,7 @@ import {
   SaleCompleted,
   SaleRefunded,
   HlaHaplotypesHashed,
+  DeliveryStatusChanged,
 } from "../generated/schema";
 
 export function handlenewListing(event: newListing): void {
@@ -26,7 +28,7 @@ export function handlenewListing(event: newListing): void {
   let existingTokenId = ExistingTokenId.load(
     event.params.tokenId.toHexString()
   );
-  let hlaData = HlaHaplotypesHashed.load(event.params.donor.toString());
+  let hlaData = HlaHaplotypesHashed.load(event.params.donor.toHexString());
 
   if (!newListing) {
     newListing = new NewListing(
@@ -90,6 +92,7 @@ export function handlesaleInitiated(event: saleInitiated): void {
   pendingSale.tokenId = event.params.tokenId;
   pendingSale.escrowedPayment = event.params.escrowedPrice;
   pendingSale.completed = false;
+  pendingSale.status = "At_Origin";
 
   existingTokenId!.buyer = event.params.buyer;
   existingTokenId!.price = BigInt.fromString("0");
@@ -149,6 +152,7 @@ export function handlesaleCompleted(event: saleCompleted): void {
   saleCompleted.salePrice = event.params.salePrice;
   saleCompleted.donorIncentive = event.params.donorIncentive;
   saleCompleted.protocolFee = event.params.protocolFee;
+  saleCompleted.timestamp = event.params.date;
 
   pendingSale!.escrowedPayment = BigInt.fromString("0");
   pendingSale!.completed = true;
@@ -188,5 +192,33 @@ export function handlesaleRefunded(event: saleRefunded): void {
 
   saleRefunded.save();
   existingTokenId!.save();
+  pendingSale!.save();
+}
+
+export function handledeliveryStatusChanged(
+  event: deliveryStatusChanged
+): void {
+  let deliveryStatusChanged = new DeliveryStatusChanged(
+    event.params.tokenId.toHexString() +
+      "-" +
+      event.block.timestamp.toHexString()
+  );
+  let pendingSale = PendingSale.load(event.params.tokenId.toHexString());
+
+  deliveryStatusChanged.tokenId = event.params.tokenId;
+  if (event.params.status === 0) {
+    deliveryStatusChanged.status = "At_Origin";
+    pendingSale!.status = "At_Origin";
+  }
+  if (event.params.status === 1) {
+    deliveryStatusChanged.status = "In_Transit";
+    pendingSale!.status = "In_Transit";
+  }
+  if (event.params.status === 2) {
+    deliveryStatusChanged.status = "Delivered";
+    pendingSale!.status = "Delivered";
+  }
+
+  deliveryStatusChanged.save();
   pendingSale!.save();
 }

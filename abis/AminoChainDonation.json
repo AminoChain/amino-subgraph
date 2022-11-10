@@ -207,7 +207,7 @@
     "inputs": [
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
-    "name": "getGenomeEncodedUrl",
+    "name": "getGenomeEncodedIpfsId",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
@@ -437,7 +437,7 @@
       { "internalType": "bytes32", "name": "hlaHash", "type": "bytes32" },
       {
         "internalType": "string",
-        "name": "genomeEncodedUrl",
+        "name": "genomeEncodedIpfsId",
         "type": "string"
       },
       { "internalType": "uint256", "name": "amount", "type": "uint256" }

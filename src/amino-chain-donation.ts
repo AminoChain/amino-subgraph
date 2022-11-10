@@ -10,7 +10,7 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
   let nftMinted = new StemCellDonationTokenized(
     event.params.donor.toHexString() + "-" + event.block.timestamp.toHexString()
   );
-  let hlaData = new HlaHaplotypesHashed(event.params.donor.toString());
+  let hlaData = new HlaHaplotypesHashed(event.params.donor.toHexString());
   hlaData.hlaHashed_A = event.params.hlaHashed.A;
   hlaData.hlaHashed_B = event.params.hlaHashed.B;
   hlaData.hlaHashed_C = event.params.hlaHashed.C;

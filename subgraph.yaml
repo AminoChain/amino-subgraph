@@ -6,7 +6,7 @@ dataSources:
     name: AminoChainMarketplace
     network: mumbai
     source:
-      address: "0xaD4ef14479a1EA2F18449ff46D19707f6ab18642"
+      address: "0x2ed5fa6A174B7009476e17f11A3db20cBD3Ed726"
       abi: AminoChainMarketplace
       startBlock: 29015835
     mapping:
@@ -27,8 +27,10 @@ dataSources:
           handler: handlelistingCanceled
         - event: newListing(address,uint256,uint256,uint256,address,address)
           handler: handlenewListing
-        - event: saleCompleted(address,address,uint256,address,uint256,uint256,uint256)
+        - event: saleCompleted(uint256,address,address,uint256,address,uint256,uint256,uint256)
           handler: handlesaleCompleted
+        - event: deliveryStatusChanged(uint256,uint8)
+          handler: handledeliveryStatusChanged
         - event: saleInitiated(address,address,uint256,uint256,address,uint256)
           handler: handlesaleInitiated
         - event: saleRefunded(uint256,address,address,uint256)
@@ -38,7 +40,7 @@ dataSources:
     name: AminoChainDonation
     network: mumbai
     source:
-      address: "0xdF20EDD683d4a5e14a7B37eC9fDc6884d07Ba92E"
+      address: "0x3dfF52834c6f242437Fc4bB960823b1a97Ab0aBC"
       abi: AminoChainDonation
       startBlock: 29015835
     mapping:

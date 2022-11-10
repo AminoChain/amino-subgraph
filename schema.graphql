@@ -13,6 +13,7 @@ type PendingSale @entity {
   id: ID!
   tokenId: BigInt!
   escrowedPayment: BigInt!
+  status: String!
   completed: Boolean!
 }
 
@@ -39,8 +40,15 @@ type ListingCanceled @entity {
   tokenId: BigInt!
 }
 
+type DeliveryStatusChanged @entity {
+  id: ID!
+  tokenId: BigInt!
+  status: String!
+}
+
 type SaleCompleted @entity {
   id: ID!
+  timestamp: BigInt!
   transactionHash: Bytes!
   buyer: Bytes!
   tokenId: BigInt!
