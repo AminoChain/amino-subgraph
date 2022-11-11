@@ -21,24 +21,20 @@ import {
 
 export function handlenewListing(event: newListing): void {
   let newListing = NewListing.load(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let existingTokenId = ExistingTokenId.load(
-    event.params.tokenId.toHexString()
-  );
+  let existingTokenId = ExistingTokenId.load(event.params.tokenId.toString());
   let hlaData = HlaHaplotypesHashed.load(event.params.donor.toHexString());
 
   if (!newListing) {
     newListing = new NewListing(
-      event.params.tokenId.toHexString() +
+      event.params.tokenId.toString() +
         "-" +
         event.block.timestamp.toHexString()
     );
   }
   if (!existingTokenId) {
-    existingTokenId = new ExistingTokenId(event.params.tokenId.toHexString());
+    existingTokenId = new ExistingTokenId(event.params.tokenId.toString());
   }
 
   newListing.tokenId = event.params.tokenId;
@@ -63,24 +59,20 @@ export function handlenewListing(event: newListing): void {
 
 export function handlesaleInitiated(event: saleInitiated): void {
   let saleInitiated = SaleInitiated.load(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let existingTokenId = ExistingTokenId.load(
-    event.params.tokenId.toHexString()
-  );
-  let pendingSale = PendingSale.load(event.params.tokenId.toHexString());
+  let existingTokenId = ExistingTokenId.load(event.params.tokenId.toString());
+  let pendingSale = PendingSale.load(event.params.tokenId.toString());
 
   if (!saleInitiated) {
     saleInitiated = new SaleInitiated(
-      event.params.tokenId.toHexString() +
+      event.params.tokenId.toString() +
         "-" +
         event.block.timestamp.toHexString()
     );
   }
   if (!pendingSale) {
-    pendingSale = new PendingSale(event.params.tokenId.toHexString());
+    pendingSale = new PendingSale(event.params.tokenId.toString());
   }
 
   saleInitiated.buyer = event.params.buyer;
@@ -104,17 +96,13 @@ export function handlesaleInitiated(event: saleInitiated): void {
 
 export function handlelistingCanceled(event: listingCanceled): void {
   let listingCanceled = ListingCanceled.load(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let existingTokenId = ExistingTokenId.load(
-    event.params.tokenId.toHexString()
-  );
+  let existingTokenId = ExistingTokenId.load(event.params.tokenId.toString());
 
   if (!listingCanceled) {
     listingCanceled = new ListingCanceled(
-      event.params.tokenId.toHexString() +
+      event.params.tokenId.toString() +
         "-" +
         event.block.timestamp.toHexString()
     );
@@ -131,15 +119,13 @@ export function handlelistingCanceled(event: listingCanceled): void {
 
 export function handlesaleCompleted(event: saleCompleted): void {
   let saleCompleted = SaleCompleted.load(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let pendingSale = PendingSale.load(event.params.tokenId.toHexString());
+  let pendingSale = PendingSale.load(event.params.tokenId.toString());
 
   if (!saleCompleted) {
     saleCompleted = new SaleCompleted(
-      event.params.tokenId.toHexString() +
+      event.params.tokenId.toString() +
         "-" +
         event.block.timestamp.toHexString()
     );
@@ -163,18 +149,14 @@ export function handlesaleCompleted(event: saleCompleted): void {
 
 export function handlesaleRefunded(event: saleRefunded): void {
   let saleRefunded = SaleRefunded.load(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let existingTokenId = ExistingTokenId.load(
-    event.params.tokenId.toHexString()
-  );
-  let pendingSale = PendingSale.load(event.params.tokenId.toHexString());
+  let existingTokenId = ExistingTokenId.load(event.params.tokenId.toString());
+  let pendingSale = PendingSale.load(event.params.tokenId.toString());
 
   if (!saleRefunded) {
     saleRefunded = new SaleRefunded(
-      event.params.tokenId.toHexString() +
+      event.params.tokenId.toString() +
         "-" +
         event.block.timestamp.toHexString()
     );
@@ -199,11 +181,9 @@ export function handledeliveryStatusChanged(
   event: deliveryStatusChanged
 ): void {
   let deliveryStatusChanged = new DeliveryStatusChanged(
-    event.params.tokenId.toHexString() +
-      "-" +
-      event.block.timestamp.toHexString()
+    event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
-  let pendingSale = PendingSale.load(event.params.tokenId.toHexString());
+  let pendingSale = PendingSale.load(event.params.tokenId.toString());
 
   deliveryStatusChanged.tokenId = event.params.tokenId;
   if (event.params.status === 0) {

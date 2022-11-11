@@ -4,7 +4,7 @@ type ExistingTokenId @entity {
   buyer: Bytes
   sizeInCC: BigInt!
   price: BigInt
-  donor: Bytes!
+  donor: Bytes
   bioBank: Bytes
   hlaHashes: HlaHaplotypesHashed
 }

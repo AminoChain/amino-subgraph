@@ -28,7 +28,7 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
     ccAmounts.push(BigInt.fromString(event.params.amounts[i].toString()));
 
     let existingTokenId = new ExistingTokenId(
-      BigInt.fromString(event.params.tokenIds[i].toString()).toHexString()
+      event.params.tokenIds[i].toString()
     );
     existingTokenId.tokenId = BigInt.fromString(
       event.params.tokenIds[i].toString()
@@ -36,7 +36,6 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
     existingTokenId.sizeInCC = BigInt.fromString(
       event.params.amounts[i].toString()
     );
-    existingTokenId.donor = event.params.donor;
     existingTokenId.hlaHashes = hlaData.id;
 
     existingTokenId.save();
