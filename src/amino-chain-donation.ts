@@ -1,8 +1,7 @@
-import { BigInt, Bytes, json } from "@graphprotocol/graph-ts";
+import { BigInt } from "@graphprotocol/graph-ts";
 import { NFTMinted as NFTMintedEvent } from "../generated/AminoChainDonation/AminoChainDonation";
 import {
   StemCellDonationTokenized,
-  ExistingTokenId,
   HlaHaplotypesHashed,
 } from "../generated/schema";
 
@@ -27,20 +26,6 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
   for (let i = 0; i < event.params.tokenIds.length; i++) {
     ids.push(BigInt.fromString(event.params.tokenIds[i].toString()));
     ccAmounts.push(BigInt.fromString(event.params.amounts[i].toString()));
-
-    let existingTokenId = new ExistingTokenId(
-      event.params.tokenIds[i].toString()
-    );
-    existingTokenId.tokenId = BigInt.fromString(
-      event.params.tokenIds[i].toString()
-    );
-    existingTokenId.sizeInCC = BigInt.fromString(
-      event.params.amounts[i].toString()
-    );
-    existingTokenId.hlaHashes = hlaData.id;
-    existingTokenId.mintTimestamp = event.block.timestamp;
-
-    existingTokenId.save();
   }
 
   nftMinted.tokenIds = ids;
