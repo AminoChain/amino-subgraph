@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0x2ed5fa6A174B7009476e17f11A3db20cBD3Ed726"
       abi: AminoChainMarketplace
-      startBlock: 29015835
+      startBlock: 29055835
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -42,7 +42,7 @@ dataSources:
     source:
       address: "0x3dfF52834c6f242437Fc4bB960823b1a97Ab0aBC"
       abi: AminoChainDonation
-      startBlock: 29015835
+      startBlock: 29055835
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

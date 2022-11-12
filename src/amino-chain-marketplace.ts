@@ -52,6 +52,7 @@ export function handlenewListing(event: newListing): void {
   existingTokenId.donor = event.params.donor;
   existingTokenId.bioBank = event.params.bioBank;
   existingTokenId.hlaHashes = hlaData!.id;
+  existingTokenId.mintTimestamp = event.block.timestamp;
 
   newListing.save();
   existingTokenId.save();

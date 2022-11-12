@@ -1,6 +1,7 @@
 type ExistingTokenId @entity {
   id: ID!
   tokenId: BigInt!
+  mintTimestamp: BigInt
   buyer: Bytes
   sizeInCC: BigInt!
   price: BigInt
@@ -75,6 +76,7 @@ type HlaHaplotypesHashed @entity(immutable: true) {
 
 type StemCellDonationTokenized @entity {
   id: ID!
+  timestamp: BigInt!
   donor: Bytes!
   hlaHashes: HlaHaplotypesHashed!
   tokenIds: [BigInt!]!

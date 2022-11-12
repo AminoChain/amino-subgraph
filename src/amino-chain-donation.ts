@@ -20,6 +20,7 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
 
   nftMinted.donor = event.params.donor;
   nftMinted.hlaHashes = hlaData.id;
+  nftMinted.timestamp = event.block.timestamp;
 
   let ids: BigInt[] = new Array();
   let ccAmounts: BigInt[] = new Array();
@@ -37,6 +38,7 @@ export function handleNFTMinted(event: NFTMintedEvent): void {
       event.params.amounts[i].toString()
     );
     existingTokenId.hlaHashes = hlaData.id;
+    existingTokenId.mintTimestamp = event.block.timestamp;
 
     existingTokenId.save();
   }
