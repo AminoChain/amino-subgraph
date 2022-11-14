@@ -49,10 +49,11 @@ type DeliveryStatusChanged @entity {
 
 type SaleCompleted @entity {
   id: ID!
+  tokenId: BigInt!
+  sizeInCC: BigInt!
   timestamp: BigInt!
   transactionHash: Bytes!
   buyer: Bytes!
-  tokenId: BigInt!
   donor: Bytes!
   salePrice: BigInt!
   donorIncentive: BigInt!

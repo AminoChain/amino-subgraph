@@ -123,6 +123,7 @@ export function handlesaleCompleted(event: saleCompleted): void {
     event.params.tokenId.toString() + "-" + event.block.timestamp.toHexString()
   );
   let pendingSale = PendingSale.load(event.params.tokenId.toString());
+  let existingTokenId = ExistingTokenId.load(event.params.tokenId.toString());
 
   if (!saleCompleted) {
     saleCompleted = new SaleCompleted(
@@ -132,9 +133,10 @@ export function handlesaleCompleted(event: saleCompleted): void {
     );
   }
 
+  saleCompleted.tokenId = event.params.tokenId;
+  saleCompleted.sizeInCC = existingTokenId!.sizeInCC;
   saleCompleted.transactionHash = event.transaction.hash;
   saleCompleted.buyer = event.params.buyer;
-  saleCompleted.tokenId = event.params.tokenId;
   saleCompleted.donor = event.params.donor;
   saleCompleted.salePrice = event.params.salePrice;
   saleCompleted.donorIncentive = event.params.donorIncentive;
