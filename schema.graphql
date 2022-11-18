@@ -29,6 +29,7 @@ type NewListing @entity {
 
 type SaleInitiated @entity {
   id: ID!
+  timestamp: BigInt!
   buyer: Bytes!
   tokenId: BigInt!
   sizeInCC: BigInt!

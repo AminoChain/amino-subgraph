@@ -81,6 +81,7 @@ export function handlesaleInitiated(event: saleInitiated): void {
   saleInitiated.sizeInCC = event.params.sizeInCC;
   saleInitiated.donor = event.params.donor;
   saleInitiated.escrowedPayment = event.params.escrowedPrice;
+  saleInitiated.timestamp = event.block.timestamp;
 
   pendingSale.tokenId = event.params.tokenId;
   pendingSale.escrowedPayment = event.params.escrowedPrice;
