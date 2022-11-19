@@ -15,6 +15,7 @@ type PendingSale @entity {
   tokenId: BigInt!
   escrowedPayment: BigInt!
   status: String!
+  buyer: Bytes!
   completed: Boolean!
 }
 

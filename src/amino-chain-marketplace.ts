@@ -88,6 +88,7 @@ export function handlesaleInitiated(event: saleInitiated): void {
   pendingSale.escrowedPayment = event.params.escrowedPrice;
   pendingSale.completed = false;
   pendingSale.status = "At_Origin";
+  pendingSale.buyer = event.params.buyer;
 
   existingTokenId!.buyer = event.params.buyer;
   existingTokenId!.price = BigInt.fromString("0");
